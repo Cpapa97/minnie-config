@@ -50,3 +50,9 @@ class MeshAdapter(dj.AttributeAdapter):
 # instantiate for use as a datajoint type
 mesh = MeshAdapter('filepath@meshes')
 decimated_mesh = MeshAdapter('filepath@decimated_meshes', has_version=True)
+
+# also store in one object for ease of use with virtual modules
+adapter_objects = {
+    'mesh': mesh,
+    'decimated_mesh': decimated_mesh
+}
