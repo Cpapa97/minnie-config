@@ -1,7 +1,8 @@
 segmentation_m65 = 1
 segmentation_m65_str = f'{segmentation_m65:02d}'
 
-schema_name_version = schema_name + segmentation_m65_str
+_schema_name = 'microns_minnie65_'
+schema_name_version = _schema_name + segmentation_m65_str
 
 import datajoint as dj
 import warnings
