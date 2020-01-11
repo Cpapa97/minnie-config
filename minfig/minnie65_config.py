@@ -23,27 +23,29 @@ if os.path.exists(external_store_basepath):
 else:
     warnings.warn(f'Path to minnie65 folder does not exist at: {external_store_basepath} (dj-stor01 not mounted under /mnt ?)')
 
-# External filepath referrencing.
-dj.config['stores'] = {
-  'minnie65': {
-    'protocol': 'file',
-    'location': external_store_basepath,
-    'stage': external_store_basepath
-  },
-  'meshes': {
-    'protocol': 'file',
-    'location': external_mesh_path,
-    'stage': external_mesh_path
-  },
-  'decimated_meshes': {
-    'protocol': 'file',
-    'location': external_decimated_mesh_path,
-    'stage': external_decimated_mesh_path
-  }
-}
 
-# Enable experimental datajoint features
-# These flags are required by 0.12.0+ (for now).
-dj.config['enable_python_native_blobs'] = True
-dj.errors._switch_filepath_types(True)
-dj.errors._switch_adapted_types(True)
+def set_configurations():
+    # External filepath referrencing.
+    dj.config['stores'] = {
+      'minnie65': {
+        'protocol': 'file',
+        'location': external_store_basepath,
+        'stage': external_store_basepath
+      },
+      'meshes': {
+        'protocol': 'file',
+        'location': external_mesh_path,
+        'stage': external_mesh_path
+      },
+      'decimated_meshes': {
+        'protocol': 'file',
+        'location': external_decimated_mesh_path,
+        'stage': external_decimated_mesh_path
+      }
+    }
+
+    # Enable experimental datajoint features
+    # These flags are required by 0.12.0+ (for now).
+    dj.config['enable_python_native_blobs'] = True
+    dj.errors._switch_filepath_types(True)
+    dj.errors._switch_adapted_types(True)
