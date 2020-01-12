@@ -31,7 +31,7 @@ To create a virtual schema with the proper attribute adapters
 ```python
 import minfig
 
-minnie = minfig.minnie_configure(return_virtual_module=True) # can 
+minnie = minfig.minnie_configure(return_virtual_module=True)
 ```
 
 or a more manual version
