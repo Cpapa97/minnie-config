@@ -3,7 +3,7 @@
 # Also enable this package to do some commandline mounting of dj-stor01 from at-storage03.ad.bcm.edu
 
 from .minnie65_config import *
-from .adapters import mesh, decimated_mesh, adapter_objects
+from .adapters import * # mesh, decimated_mesh, adapter_objects
 
 # Just need to run verify_paths() and set_configurations()
 # Or use this...
