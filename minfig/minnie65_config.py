@@ -1,48 +1,61 @@
-segmentation_m65 = 1
-segmentation_m65_str = f'{segmentation_m65:02d}'
-
-_schema_name = 'microns_minnie65_'
-schema_name_version = _schema_name + segmentation_m65_str
-
 import datajoint as dj
 import warnings
 import os
+
+
+segmentation_m65 = 1
+segmentation_m65_str = f'{segmentation_m65:02d}'
+
+_schema_base_name = 'microns_minnie65_'
+schema_name_m65 = _schema_name + segmentation_m65_str
 
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
 external_store_basepath = '/mnt/dj-stor01/platinum/minnie65'
 external_segmentation_path = os.path.join(external_store_basepath, segmentation_m65_str)
 external_mesh_path = os.path.join(external_segmentation_path, 'meshes')
 external_decimated_mesh_path = os.path.join(external_segmentation_path, 'decimated_meshes')
-if os.path.exists(external_store_basepath):
-    if not os.path.exists(external_segmentation_path):
-        os.mkdir(external_segmentation_path)
-    if not os.path.exists(external_mesh_path):
-        os.mkdir(external_mesh_path)
-    if not os.path.exists(external_decimated_mesh_path):
-        os.mkdir(external_decimated_mesh_path)
-else:
-    warnings.warn(f'Path to minnie65 folder does not exist at: {external_store_basepath} (dj-stor01 not mounted under /mnt ?)')
 
+def verify_paths(create_if_missing=False):
+    def warn_if_missing(path, warning_info, create_if_missing):
+        warning_msg = 'Path to minnie65 folder does not exist at: {path} ({info})'
+        if not os.path.exists(path):
+            if create_if_missing:
+                os.mkdir(external_segmentation_path)
+                return True
+            else:
+                warning.warn(warning_msg.format(path=path, info=warning_info))
+                return False
+        return True
+
+    if warn_if_missing(external_store_basepath, 'dj-stor01 not mounted under /mnt ?', create_if_missing=False):
+        warn_if_missing(external_segmentation_path, '', create_if_missing=create_if_missing)
+        warn_if_missing(external_mesh_path, '', create_if_missing=create_if_missing)
+        warn_if_missing(external_decimated_mesh_path, '', create_if_missing=create_if_missing)
 
 def set_configurations():
     # External filepath referrencing.
-    dj.config['stores'] = {
-      'minnie65': {
-        'protocol': 'file',
-        'location': external_store_basepath,
-        'stage': external_store_basepath
-      },
-      'meshes': {
-        'protocol': 'file',
-        'location': external_mesh_path,
-        'stage': external_mesh_path
-      },
-      'decimated_meshes': {
-        'protocol': 'file',
-        'location': external_decimated_mesh_path,
-        'stage': external_decimated_mesh_path
-      }
+    stores_config = {
+        'minnie65': {
+            'protocol': 'file',
+            'location': external_store_basepath,
+            'stage': external_store_basepath
+        },
+        'meshes': {
+            'protocol': 'file',
+            'location': external_mesh_path,
+            'stage': external_mesh_path
+        },
+        'decimated_meshes': {
+            'protocol': 'file',
+            'location': external_decimated_mesh_path,
+            'stage': external_decimated_mesh_path
+        }
     }
+
+    if 'stores' not in dj.config:
+        dj.config['stores'] = stores_config
+    else:
+        dj.config['stores'].update(stores_config)
 
     # Enable experimental datajoint features
     # These flags are required by 0.12.0+ (for now).

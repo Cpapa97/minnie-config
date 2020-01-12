@@ -5,4 +5,4 @@
 from .minnie65_config import *
 from .adapters import mesh, decimated_mesh, adapter_objects
 
-__all__ = ['adapters', 'minnie65_config']
+# Just need to run verify_paths() and set_configurations()
