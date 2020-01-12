@@ -12,10 +12,29 @@ pip3 install git+https://github.com/cajal/minnie-config.git
 Before initializing the schema or a virtual module of the schema
 
 ```python
-from minfig import *
+import minfig
+from minfig.adapters import * # Required for the adapters to be used with locally defined tables
+
+minfig.minnie_configure()
+```
+
+or
+
+```python
+from minfig import * # This will also import the attribute adapters into the namespace
+
+minfig.minnie_configure()
 ```
 
 To create a virtual schema with the proper attribute adapters
+
+```python
+import minfig
+
+minnie = minfig.minnie_configure(return_virtual_module=True) # can 
+```
+
+or a more manual version
 
 ```python
 import datajoint as dj
