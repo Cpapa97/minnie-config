@@ -7,7 +7,7 @@ segmentation_m65 = 1
 segmentation_m65_str = f'{segmentation_m65:02d}'
 
 _schema_base_name = 'microns_minnie65_'
-schema_name_m65 = _schema_name + segmentation_m65_str
+schema_name_m65 = _schema_base_name + segmentation_m65_str
 
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
 external_store_basepath = '/mnt/dj-stor01/platinum/minnie65'
