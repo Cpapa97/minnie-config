@@ -8,7 +8,7 @@ from .adapters import * # mesh, decimated_mesh, adapter_objects
 # Just need to run verify_paths() and set_configurations()
 # Or use this...
 
-def configure(return_virtual_module=False, create_if_missing=False):
+def configure_minnie(return_virtual_module=False, create_if_missing=False):
     verify_paths(create_if_missing=create_if_missing)
     set_configurations()
 
