@@ -24,7 +24,7 @@ def verify_paths(create_if_missing=False):
                 os.mkdir(external_segmentation_path)
                 return True
             else:
-                warning.warn(warning_msg.format(path=path, info=warning_info))
+                warnings.warn(warning_msg.format(path=path, info=warning_info))
                 return False
         return True
 
