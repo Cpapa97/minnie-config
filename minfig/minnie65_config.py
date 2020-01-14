@@ -10,7 +10,8 @@ _schema_base_name = 'microns_minnie65_'
 schema_name_m65 = _schema_base_name + segmentation_m65_str
 
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
-external_store_basepath = '/mnt/dj-stor01/platinum/minnie65'
+mount_path = 'mnt'
+external_store_basepath = os.path.join(mount_path, 'dj-stor01', 'platinum', 'minnie65')
 external_segmentation_path = os.path.join(external_store_basepath, segmentation_m65_str)
 external_mesh_path = os.path.join(external_segmentation_path, 'meshes')
 external_decimated_mesh_path = os.path.join(external_segmentation_path, 'decimated_meshes')
