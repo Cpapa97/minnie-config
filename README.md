@@ -15,7 +15,7 @@ Before initializing the schema or a virtual module of the schema
 import minfig
 from minfig.adapters import * # Required for the adapters to be used with locally defined tables
 
-minfig.minnie_configure()
+minfig.configure_minnie()
 ```
 
 or
@@ -23,7 +23,7 @@ or
 ```python
 from minfig import * # This will also import the attribute adapters into the namespace
 
-minfig.minnie_configure()
+minfig.configure_minnie()
 ```
 
 To create a virtual schema with the proper attribute adapters
@@ -31,7 +31,7 @@ To create a virtual schema with the proper attribute adapters
 ```python
 import minfig
 
-minnie = minfig.minnie_configure(return_virtual_module=True)
+minnie = minfig.configure_minnie(return_virtual_module=True)
 ```
 
 or a more manual version
