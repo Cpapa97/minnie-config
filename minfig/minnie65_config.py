@@ -4,7 +4,7 @@ import os
 
 
 segmentation_m65 = 1
-segmentation_m65_str = f'{segmentation_m65:02d}'
+segmentation_m65_str = '{:02d}'.format(segmentation_m65)
 
 _schema_base_name = 'microns_minnie65_'
 schema_name_m65 = _schema_base_name + segmentation_m65_str
