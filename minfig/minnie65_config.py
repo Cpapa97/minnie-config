@@ -11,13 +11,15 @@ schema_name_m65 = _schema_base_name + segmentation_m65_str
 
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
 if os.name == 'nt':
-    drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount.')
+    drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount: ')
+    if not drive_letter.endswith(':'):
+        drive_letter += ':'
     mount_path = os.path.join(drive_letter, os.sep)
 elif os.name == 'posix':
-    mount_path = 'mnt'
+    mount_path = os.path.join('mnt', 'dj-stor01')
 else:
-    raise SystemError('Unsupported OS pathing')
-external_store_basepath = os.path.join(mount_path, 'dj-stor01', 'platinum', 'minnie65')
+    raise OSError('Unsupported OS pathing')
+external_store_basepath = os.path.join(mount_path, 'platinum', 'minnie65')
 external_segmentation_path = os.path.join(external_store_basepath, segmentation_m65_str)
 external_mesh_path = os.path.join(external_segmentation_path, 'meshes')
 external_decimated_mesh_path = os.path.join(external_segmentation_path, 'decimated_meshes')
@@ -38,6 +40,8 @@ def verify_paths(create_if_missing=False):
         warn_if_missing(external_segmentation_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_mesh_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_decimated_mesh_path, '', create_if_missing=create_if_missing)
+    else:
+        raise OSError('dj-stor01 not available')
 
 def set_configurations():
     # External filepath referrencing.
