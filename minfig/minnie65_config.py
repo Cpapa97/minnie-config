@@ -25,7 +25,7 @@ if os.name == 'nt':
         drive_letter += ':'
     mount_path = os.path.join(drive_letter, os.sep)
 elif os.name == 'posix':
-    mount_path = os.path.join('mnt', 'dj-stor01')
+    mount_path = os.path.join(os.sep, 'mnt', 'dj-stor01')
 else:
     raise OSError('Unsupported OS pathing')
 external_store_basepath = os.path.join(mount_path, 'platinum', 'minnie65')
