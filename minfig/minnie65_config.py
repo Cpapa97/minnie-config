@@ -13,15 +13,19 @@ schema_name_m65 = _schema_base_name + segmentation_m65_str
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
 if os.name == 'nt':
     # Read or write the windows drive letter to a local json file
+    dir_path = os.path.join(os.environ['APPDATA'], 'minnie-config')
     filename = 'mount_config.json'
-    if os.path.isfile(filename):
-        with open(filename, 'r') as f:
+    filepath = os.path.join(dir_path, filename)
+    if os.path.isfile(filepath):
+        with open(filepath, 'r') as f:
             drive_letter = json.load(f)['windows']
     else:
         drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount: ')
-        with open(filename, 'w') as f:
-            print(os.getcwd())
-            json.dump({'windows': drive_letter}, f)
+        try:
+            with open(filepath, 'w') as f:
+                json.dump({'windows': drive_letter}, f)
+        except OSError as e:
+            warnings.warn(e)
     if not drive_letter.endswith(':'):
         drive_letter += ':'
     mount_path = os.path.join(drive_letter, os.sep)
