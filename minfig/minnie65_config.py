@@ -20,6 +20,7 @@ if os.name == 'nt':
     else:
         drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount: ')
         with open(filename, 'w') as f:
+            print(os.getcwd())
             json.dump({'windows': drive_letter}, f)
     if not drive_letter.endswith(':'):
         drive_letter += ':'
