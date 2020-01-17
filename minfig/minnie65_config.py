@@ -14,6 +14,8 @@ schema_name_m65 = _schema_base_name + segmentation_m65_str
 if os.name == 'nt':
     # Read or write the windows drive letter to a local json file
     dir_path = os.path.join(os.environ['APPDATA'], 'minnie-config')
+    if not os.path.isdir(dir_path):
+        os.mkdir(dir_path)
     filename = 'mount_config.json'
     filepath = os.path.join(dir_path, filename)
     if os.path.isfile(filepath):
