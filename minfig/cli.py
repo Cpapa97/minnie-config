@@ -36,7 +36,8 @@ def mounter():
     parser.add_argument('-p', '--password', type=str,
                         help='password credentials for mounting, if absent will ask for input')
     parser.add_argument('-r', '--reset', action='store_true',
-                        help='retries the mount command even if the drive is already mounted')
+                        help='retries the mount command even if the drive is already mounted'
+                        ', also useful if the program believes it is mounted even when it isn\'t')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='prints traceback on subprocess errors')
 
