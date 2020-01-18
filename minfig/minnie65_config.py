@@ -12,25 +12,28 @@ schema_name_m65 = _schema_base_name + segmentation_m65_str
 
 # External store paths + ensure the directories exist. For new segmentations create a subfolder.
 if os.name == 'nt':
-    # Read or write the windows drive letter to a local json file
-    dir_path = os.path.join(os.environ['APPDATA'], 'minnie-config')
-    if not os.path.isdir(dir_path):
-        os.mkdir(dir_path)
-    filename = 'mount_config.json'
-    filepath = os.path.join(dir_path, filename)
-    if os.path.isfile(filepath):
-        with open(filepath, 'r') as f:
-            drive_letter = json.load(f)['windows']
-    else:
-        drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount: ')
-        try:
-            with open(filepath, 'w') as f:
-                json.dump({'windows': drive_letter}, f)
-        except OSError as e:
-            warnings.warn(e)
-    if not drive_letter.endswith(':'):
-        drive_letter += ':'
-    mount_path = os.path.join(drive_letter, os.sep)
+    # # Read or write the windows drive letter to a local json file
+    # dir_path = os.path.join(os.environ['APPDATA'], 'minnie-config')
+    # if not os.path.isdir(dir_path):
+    #     os.mkdir(dir_path)
+    # filename = 'mount_config.json'
+    # filepath = os.path.join(dir_path, filename)
+    # if os.path.isfile(filepath):
+    #     with open(filepath, 'r') as f:
+    #         drive_letter = json.load(f)['windows']
+    # else:
+    #     drive_letter = input('If you are on Windows, please input the drive letter associated with the \\\\at-storage03.ad.bcm.edu\\dj-stor01 mount: ')
+    #     try:
+    #         with open(filepath, 'w') as f:
+    #             json.dump({'windows': drive_letter}, f)
+    #     except OSError as e:
+    #         warnings.warn(e)
+    # if not drive_letter.endswith(':'):
+    #     drive_letter += ':'
+    # mount_path = os.path.join(drive_letter, os.sep)
+    
+    dir_name = '\\\\at-storage3.ad.bcm.edu\\dj-stor01'
+    mount_path = dir_name
 elif os.name == 'posix':
     mount_path = os.path.join(os.sep, 'mnt', 'dj-stor01')
 else:

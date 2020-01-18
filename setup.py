@@ -15,5 +15,10 @@ setup(
     author='Christos Papadopoulos',
     author_email='cpapadop@bcm.edu',
     packages=find_packages(exclude=[]),
-    install_requires=requirements
+    install_requires=requirements,
+    entry_points = {
+        'console_scripts': [
+            'minfig = minfig.cli:mounter'
+        ]
+    }
 )
