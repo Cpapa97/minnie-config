@@ -7,6 +7,48 @@ Synced universal configuration for working with the `microns_minnie65_%` schemas
 pip3 install git+https://github.com/cajal/minnie-config.git
 ```
 
+## Command Line Interface (CLI)
+
+This is only used for mounting the required `dj-stor01` (currently windows only)
+
+```bash
+minfig -s --drive Z 
+```
+
+for example will mount the network drive to the Z drive letter on windows while the `-s` option makes it persistent.
+
+```bash
+minfig -m --drive Z
+```
+
+will unmount it.
+
+Another way of mounting without mapping to a drive letter on windows is
+
+```bash
+minfig -s
+```
+
+however this will also require the drive to be absent, like this
+
+```bash
+minfig -m
+```
+
+to unmount it and won't be visible in file explorer. You can still view the mapped drives with
+
+```bash
+net use
+```
+
+if necessary.
+
+There are more options like including the username or password on command line, and these option descriptions are available of course with
+
+```bash
+minfig -h
+```
+
 ## Usage
 
 Before initializing the schema or a virtual module of the schema
