@@ -10,10 +10,15 @@ with open(path.join(here, 'requirements.txt')) as f:
 
 setup(
     name='minnie-config',
-    version='0.0.2',
+    version='0.0.3',
     description='Datajoint configurations for the microns_minnie65_* schemas.',
     author='Christos Papadopoulos',
     author_email='cpapadop@bcm.edu',
     packages=find_packages(exclude=[]),
-    install_requires=requirements
+    install_requires=requirements,
+    entry_points = {
+        'console_scripts': [
+            'minfig = minfig.cli:mounter'
+        ]
+    }
 )
