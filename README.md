@@ -9,13 +9,13 @@ pip3 install git+https://github.com/cajal/minnie-config.git
 
 ## Command Line Interface (CLI)
 
-This is only used for mounting the required `dj-stor01` (currently windows only)
+This is only used for mounting the required `dj-stor01` (currently windows only) which for example will mount the network drive to the Z drive letter on windows while the `-s` option makes it persistent.
 
 ```bash
 minfig -s --drive Z 
 ```
 
-for example will mount the network drive to the Z drive letter on windows while the `-s` option makes it persistent.
+This command
 
 ```bash
 minfig -m --drive Z
