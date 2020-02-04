@@ -46,13 +46,16 @@ external_skeleton_path = os.path.join(external_segmentation_path, 'skeletons')
 
 def verify_paths(create_if_missing=False):
     def warn_if_missing(path, warning_info, create_if_missing):
-        warning_msg = 'Path to minnie65 folder does not exist at: {path} ({info})'
+        warning_msg = 'Path to minnie65 folder does not exist at: {path}'
         if not os.path.exists(path):
             if create_if_missing:
                 os.mkdir(external_segmentation_path)
                 return True
             else:
-                warnings.warn(warning_msg.format(path=path, info=warning_info))
+                msg = warning_msg.format(path=path)
+                if warning_info:
+                    msg += f' ({warning_info})'
+                warnings.warn(msg)
                 return False
         return True
 
