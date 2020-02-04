@@ -61,12 +61,8 @@ def mounter():
                     traceback.print_exc()
         else:
             print('{} was not found'.format(dir_name))
-        
-        unmount_only_count = 2
-        if drive_letter:
-            unmount_only_count += 1
-        if len(sys.argv) <= unmount_only_count:
-            return 0
+            
+        return 0
 
     if os.path.ismount(dir_name):
         print('{} is already mounted'.format(dir_name))

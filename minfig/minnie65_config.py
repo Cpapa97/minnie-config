@@ -42,16 +42,20 @@ external_store_basepath = os.path.join(mount_path, 'platinum', 'minnie65')
 external_segmentation_path = os.path.join(external_store_basepath, segmentation_m65_str)
 external_mesh_path = os.path.join(external_segmentation_path, 'meshes')
 external_decimated_mesh_path = os.path.join(external_segmentation_path, 'decimated_meshes')
+external_skeleton_path = os.path.join(external_segmentation_path, 'skeletons')
 
 def verify_paths(create_if_missing=False):
     def warn_if_missing(path, warning_info, create_if_missing):
-        warning_msg = 'Path to minnie65 folder does not exist at: {path} ({info})'
+        warning_msg = 'Path to minnie65 folder does not exist at: {path}'
         if not os.path.exists(path):
             if create_if_missing:
                 os.mkdir(external_segmentation_path)
                 return True
             else:
-                warnings.warn(warning_msg.format(path=path, info=warning_info))
+                msg = warning_msg.format(path=path)
+                if warning_info:
+                    msg += f' ({warning_info})'
+                warnings.warn(msg)
                 return False
         return True
 
@@ -59,10 +63,11 @@ def verify_paths(create_if_missing=False):
         warn_if_missing(external_segmentation_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_mesh_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_decimated_mesh_path, '', create_if_missing=create_if_missing)
+        warn_if_missing(external_skeleton_path, '', create_if_missing=create_if_missing)
     else:
         raise OSError('dj-stor01 not available')
 
-def set_configurations():
+def set_configurations(cache_path=None):
     # External filepath referrencing.
     stores_config = {
         'minnie65': {
@@ -79,6 +84,10 @@ def set_configurations():
             'protocol': 'file',
             'location': external_decimated_mesh_path,
             'stage': external_decimated_mesh_path
+        },
+        'skeletons': {
+            'protocol': 'file',
+            'location': external_skeleton_path
         }
     }
 
@@ -86,6 +95,10 @@ def set_configurations():
         dj.config['stores'] = stores_config
     else:
         dj.config['stores'].update(stores_config)
+
+    # External object cache
+    if cache_path is not None:
+        dj.config['cache'] = cache_path
 
     # Enable experimental datajoint features
     # These flags are required by 0.12.0+ (for now).
