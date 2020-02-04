@@ -15,7 +15,7 @@ This is only used for mounting the required `dj-stor01` (currently windows only)
 minfig -s --drive Z 
 ```
 
-This command
+While this command
 
 ```bash
 minfig -m --drive Z
