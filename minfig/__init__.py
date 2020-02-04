@@ -8,9 +8,9 @@ from .adapters import * # mesh, decimated_mesh, adapter_objects
 # Just need to run verify_paths() and set_configurations()
 # Or use this...
 
-def configure_minnie(return_virtual_module=False, create_if_missing=False):
+def configure_minnie(return_virtual_module=False, create_if_missing=False, cache_path=None):
     verify_paths(create_if_missing=create_if_missing)
-    set_configurations()
+    set_configurations(cache_path=cache_path)
 
     if return_virtual_module:
         import datajoint as dj

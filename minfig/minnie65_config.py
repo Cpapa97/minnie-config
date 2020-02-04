@@ -64,7 +64,7 @@ def verify_paths(create_if_missing=False):
     else:
         raise OSError('dj-stor01 not available')
 
-def set_configurations():
+def set_configurations(cache_path=None):
     # External filepath referrencing.
     stores_config = {
         'minnie65': {
@@ -92,6 +92,10 @@ def set_configurations():
         dj.config['stores'] = stores_config
     else:
         dj.config['stores'].update(stores_config)
+
+    # External object cache
+    if cache_path is not None:
+        dj.config['cache'] = cache_path
 
     # Enable experimental datajoint features
     # These flags are required by 0.12.0+ (for now).
