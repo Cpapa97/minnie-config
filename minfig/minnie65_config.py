@@ -42,6 +42,7 @@ external_store_basepath = os.path.join(mount_path, 'platinum', 'minnie65')
 external_segmentation_path = os.path.join(external_store_basepath, segmentation_m65_str)
 external_mesh_path = os.path.join(external_segmentation_path, 'meshes')
 external_decimated_mesh_path = os.path.join(external_segmentation_path, 'decimated_meshes')
+external_skeleton_path = os.path.join(external_segmentation_path, 'skeletons')
 
 def verify_paths(create_if_missing=False):
     def warn_if_missing(path, warning_info, create_if_missing):
@@ -59,6 +60,7 @@ def verify_paths(create_if_missing=False):
         warn_if_missing(external_segmentation_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_mesh_path, '', create_if_missing=create_if_missing)
         warn_if_missing(external_decimated_mesh_path, '', create_if_missing=create_if_missing)
+        warn_if_missing(external_skeleton_path, '', create_if_missing=create_if_missing)
     else:
         raise OSError('dj-stor01 not available')
 
@@ -79,6 +81,10 @@ def set_configurations():
             'protocol': 'file',
             'location': external_decimated_mesh_path,
             'stage': external_decimated_mesh_path
+        },
+        'skeletons': {
+            'protocol': 'file',
+            'location': external_skeleton_path
         }
     }
 
