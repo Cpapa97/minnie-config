@@ -10,13 +10,13 @@ def ismount_windows(path):
     subprocess # Sincerely need an accurate way of checking the mount correctly after mapped or unmapped drive is disconnected,
                # otherwise it just claims it's mounted requiring -r to succefully remount.
 
-def mounter():
+def mounter(): # using pathlib.Path here might enable me to skip the drive_letter check down below
     if os.name == 'nt':
-        dir_name = '\\\\at-storage3.ad.bcm.edu\\dj-stor01'
+        dir_name = r'\\at-storage.ad.bcm.edu\dj-stor01'
         mount_cmd = 'net use {drive} {dir} {password} /user:{username} /persistent:{persistence}'
         unmount_cmd = 'net use {switch} /delete'
     elif False and os.name == 'posix':
-        dir_name = '/at-storage3.ad.bcm.edu/dj-stor01' # Wrong?
+        dir_name = '/at-storage.ad.bcm.edu/dj-stor01' # Wrong?
         mount_cmd = ''
         unmount_cmd = ''
     else:
@@ -56,7 +56,7 @@ def mounter():
             if args.verbose: print(unmount_cmd)
             try:
                 subprocess.check_call(unmount_cmd.split())
-            except subprocess.CalledProcessError as e:
+            except subprocess.CalledProcessError:
                 if args.verbose:
                     traceback.print_exc()
         else:
@@ -101,6 +101,6 @@ def mounter():
 
     try:
         subprocess.check_call(mount_cmd.split())
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
         if args.verbose:
             traceback.print_exc()
