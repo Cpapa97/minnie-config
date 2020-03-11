@@ -50,7 +50,11 @@ def verify_paths(create_if_missing=False):
     else:
         raise OSError('dj-stor01 not available')
 
-def set_configurations(cache_path=None):
+def set_configurations(host=None, cache_path=None): #, save_config=False # left out for because I'm not sure if having the stores be saved to config is a good idea or not
+    # Set database host
+    if host is not None:
+        dj.config['database.host'] = str(host)
+
     # External filepath referrencing.
     stores_config = {
         'minnie65': {
