@@ -55,22 +55,22 @@ def set_configurations(cache_path=None):
     stores_config = {
         'minnie65': {
             'protocol': 'file',
-            'location': external_store_basepath,
-            'stage': external_store_basepath
+            'location': str(external_store_basepath),
+            'stage': str(external_store_basepath)
         },
         'meshes': {
             'protocol': 'file',
-            'location': external_mesh_path,
-            'stage': external_mesh_path
+            'location': str(external_mesh_path),
+            'stage': str(external_mesh_path)
         },
         'decimated_meshes': {
             'protocol': 'file',
-            'location': external_decimated_mesh_path,
-            'stage': external_decimated_mesh_path
+            'location': str(external_decimated_mesh_path),
+            'stage': str(external_decimated_mesh_path)
         },
         'skeletons': {
             'protocol': 'file',
-            'location': external_skeleton_path
+            'location': str(external_skeleton_path)
         }
     }
 
