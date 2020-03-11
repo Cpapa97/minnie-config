@@ -50,27 +50,31 @@ def verify_paths(create_if_missing=False):
     else:
         raise OSError('dj-stor01 not available')
 
-def set_configurations(cache_path=None):
+def set_configurations(host=None, cache_path=None): #, save_config=False # left out for because I'm not sure if having the stores be saved to config is a good idea or not
+    # Set database host
+    if host is not None:
+        dj.config['database.host'] = str(host)
+
     # External filepath referrencing.
     stores_config = {
         'minnie65': {
             'protocol': 'file',
-            'location': external_store_basepath,
-            'stage': external_store_basepath
+            'location': str(external_store_basepath),
+            'stage': str(external_store_basepath)
         },
         'meshes': {
             'protocol': 'file',
-            'location': external_mesh_path,
-            'stage': external_mesh_path
+            'location': str(external_mesh_path),
+            'stage': str(external_mesh_path)
         },
         'decimated_meshes': {
             'protocol': 'file',
-            'location': external_decimated_mesh_path,
-            'stage': external_decimated_mesh_path
+            'location': str(external_decimated_mesh_path),
+            'stage': str(external_decimated_mesh_path)
         },
         'skeletons': {
             'protocol': 'file',
-            'location': external_skeleton_path
+            'location': str(external_skeleton_path)
         }
     }
 
