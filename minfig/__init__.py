@@ -10,7 +10,7 @@ from .adapters import * # mesh, decimated_mesh, adapter_objects
 
 def configure_minnie(return_virtual_module=False, create_if_missing=False, host=None, cache_path=None):
     verify_paths(create_if_missing=create_if_missing)
-    set_configurations(cache_path=cache_path)
+    set_configurations(host=host, cache_path=cache_path)
 
     if return_virtual_module:
         import datajoint as dj
