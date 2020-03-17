@@ -16,6 +16,7 @@ def mounter(): # using pathlib.Path here might enable me to skip the drive_lette
         mount_cmd = 'net use {drive} {dir} {password} /user:{username} /persistent:{persistence}'
         unmount_cmd = 'net use {switch} /delete'
     elif False and os.name == 'posix':
+        # os.path.ismount(path) only works for Unix/Posix, same for pathlib.Pathlib().is_mount()
         dir_name = '/at-storage.ad.bcm.edu/dj-stor01' # Wrong?
         mount_cmd = ''
         unmount_cmd = ''
@@ -64,7 +65,7 @@ def mounter(): # using pathlib.Path here might enable me to skip the drive_lette
             
         return 0
 
-    if os.path.ismount(dir_name):
+    if os.path.ismount(dir_name): # This sometimes returns only true for Windows, even if the point is not mounted
         print('{} is already mounted'.format(dir_name))
         if args.reset:
             print('Retrying mount')
