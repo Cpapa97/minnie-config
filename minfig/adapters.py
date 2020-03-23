@@ -27,10 +27,11 @@ class MeshAdapter(dj.AttributeAdapter):
         assert os.path.exists(filepath)
 
         with h5py.File(filepath, 'r') as hf:
-            segment_id = hf['segment_id'][()].astype(np.uint64)
             vertices = hf['vertices'][()].astype(np.float64)
             faces = hf['faces'][()].reshape(-1, 3).astype(np.uint32)
-                
+        
+        segment_id = os.path.splitext(os.path.basename(filepath))[0]
+
         return self.TriangularMesh(
             segment_id=int(segment_id),
             vertices=vertices,
