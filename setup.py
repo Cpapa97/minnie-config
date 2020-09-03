@@ -11,7 +11,7 @@ with open(path.join(here, 'requirements.txt')) as f:
 setup(
     name='minnie-config',
     version='0.0.9',
-    description='Datajoint configurations for the microns_minnie65_* schemas.',
+    description='Datajoint configurations for the microns_minnie65_* phase 3 schemas.',
     author='Christos Papadopoulos',
     author_email='cpapadop@bcm.edu',
     packages=find_packages(exclude=[]),
