@@ -17,8 +17,8 @@ wheel:
 pypi: clean sdist wheel
 	twine upload dist/*
 	
-pypitest: clean sdist wheel
-	twine upload -r pypitest dist/*
+testpypi: clean sdist wheel
+	twine upload -r testpypi dist/*
 
 clean:
 	rm -rf dist && rm -rf build && rm -rf *.egg-info
