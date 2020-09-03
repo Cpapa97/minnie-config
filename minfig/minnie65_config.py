@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-segmentation_m65 = 1
+segmentation_m65 = 2
 segmentation_m65_str = '{:02d}'.format(segmentation_m65)
 
 _schema_base_name = 'microns_minnie65_'
@@ -28,6 +28,11 @@ external_decimated_mesh_path = external_segmentation_path / 'decimated_meshes'
 external_skeleton_path = external_segmentation_path / 'skeletons'
 
 def verify_paths(create_if_missing=False):
+    """
+    This will verify if the paths exist.
+    If the basepath does not exist however, it will not be created
+    even if the "create_if_missing" argument is provided.
+    """
     def warn_if_missing(path, warning_info, create_if_missing):
         warning_msg = 'Path to minnie65 folder does not exist at: {path}'
         if not path.exists():
