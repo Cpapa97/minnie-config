@@ -18,7 +18,7 @@ setup(
     install_requires=requirements,
     entry_points = {
         'console_scripts': [
-            'minfig = minfig.cli:mounter'
+            'minnie-config = minnie_config.cli:mounter'
         ]
     }
 )
